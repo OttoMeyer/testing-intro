@@ -4,13 +4,27 @@ function notImplemented() {
 
 function addToCart(cart, newProduct, quantity) { 
   if (quantity === 0) throw new RangeError("Quantity can not be 0");
-  if (newProduct.stock < quantity) throw new RangeError("Not enough stock");
   const matchProduct = cart.find((product) => product.id === newProduct.id);
-  if (matchProduct) matchProduct.quantity += quantity;
-  else cart.push({...newProduct, quantity:quantity});
+  console.log(matchProduct);
+  
+  if (matchProduct) {
+    if (newProduct.stock < matchProduct.quantity + quantity) throw new RangeError("Not enough stock");
+    matchProduct.quantity += quantity;
+  } else {
+    if (newProduct.stock < quantity) throw new RangeError("Not enough stock");
+    cart.push({...newProduct, quantity:quantity});
+  }
   return cart;
 }
-function changeQuantity() { return notImplemented(); }
+function changeQuantity(cart, id, quantity) { 
+  if (quantity === 0) throw new RangeError("Quantity can not be 0");
+  const matchProduct = cart.find((product) => product.id === id);
+  if (matchProduct) {
+    if (matchProduct.stock < quantity) throw new RangeError("Not enough stock");
+    matchProduct.quantity = quantity;
+  } 
+  return cart;
+}
 function removeFromCart() { return notImplemented(); }
 function calculateCartSubtotal() { return notImplemented(); }
 function calculateOrderTotal() { return notImplemented(); }
