@@ -39,7 +39,7 @@ describe('getProductById', () => {
   });
   //test.todo('ID undefined возвращает null');
   test('ID undefined возвращает null', () => {
-    const product = getProductById(products, );
+    const product = getProductById(products, undefined);
     expect(product).toBeNull();
   });
   //test.todo('ID NaN возвращает null');

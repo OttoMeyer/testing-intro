@@ -10,7 +10,6 @@ function notImplemented() {
 function addToCart(cart, newProduct, quantity) { 
   if (quantity === 0) throw new RangeError("Quantity can not be 0");
   const matchProduct = cart.find((product) => product.id === newProduct.id);
-  console.log(matchProduct);
   
   if (matchProduct) {
     if (newProduct.stock < matchProduct.quantity + quantity) throw new RangeError("Not enough stock");
